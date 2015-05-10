@@ -4,13 +4,13 @@ return array(
 	'components'=>array(
 		'db'=>array(
 			'connectionString' => 'pgsql:'
-				. 'host=ec2-54-225-154-5.compute-1.amazonaws.com;'
+				. 'host=localhost;'
 				. 'port=5432;'
-				. 'dbname=d482a7prsubscl',
+				. 'dbname=timetable',
 
 //			'emulatePrepare' => true,
-			'username' => 'xdzkljkowyigcy',
-			'password' => 'MUdqtcF263XVFSWeKc8T9AR254',
+			'username' => 'postgres',
+			'password' => '123456',
 			'charset' => 'utf8',
 			'tablePrefix' => 'tt_',
 		),
