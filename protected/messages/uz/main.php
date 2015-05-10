@@ -46,6 +46,8 @@ return array(
 	'List' => 'Ro\'yhat',
 	'Manage' => 'Boshqaruv',
 	'View' => 'Ko\'rish',
+	'Update' => 'Tahrirlash',
+	'Delete' => 'O\'chirish',
 
 	'Are you sure you want to delete this item?' => 'Ishonchingiz komilmi?',
 	'Operations' => 'Amallar',
