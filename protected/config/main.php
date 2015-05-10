@@ -35,14 +35,6 @@ return array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=timeTable',
-			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
-			'charset' => 'utf8',
-			'tablePrefix' => 'tt_',
-		),
 		'errorHandler'=>array(
 			'errorAction'=>'site/error',
 		),
