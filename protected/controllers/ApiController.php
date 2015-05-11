@@ -46,5 +46,15 @@ class ApiController extends Controller{
 		echo $result;
 	}
 
+	public function actionGetgrouplist(){
+		$list = CHtml::listData(Group::model()->findAll(), 'id', 'name', '');
+		$json = json_encode($list);
+		echo $json;
+	}
+
+	public function actionSetCollumn(){
+		$db = Yii::app()->db->createCommand();
+		$db->addColumn('{{user}}', 'reg_id', 'TEXT NULL');
+	}
 
 }
