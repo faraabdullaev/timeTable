@@ -47,7 +47,13 @@ class ApiController extends Controller{
 
 	public function actionGetgrouplist(){
 		$list = CHtml::listData(Group::model()->findAll(), 'id', 'name', '');
-		$json = json_encode($list);
+		$results = array();
+		foreach($list as $id => $name)
+			$results[] = [
+				'id' => $id,
+				'name' => $name
+			];
+		$json = json_encode($results);
 		echo $json;
 	}
 
