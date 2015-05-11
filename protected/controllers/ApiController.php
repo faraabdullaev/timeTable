@@ -41,7 +41,6 @@ class ApiController extends Controller{
 			die('Curl failed: ' . curl_error($ch));
 		}
 
-		// Close connection
 		curl_close($ch);
 		echo $result;
 	}
@@ -50,6 +49,32 @@ class ApiController extends Controller{
 		$list = CHtml::listData(Group::model()->findAll(), 'id', 'name', '');
 		$json = json_encode($list);
 		echo $json;
+	}
+
+	public function actionRegister($name, $group_id, $registration_key){
+		$error = false;
+		$user = User::model()->findByAttributes([
+			'name' => $name,
+			'group_id' => $group_id
+		]);
+		if(!$user){
+			$user = new User;
+			$user->name = $name;
+			$user->group_id = $group_id;
+			$user->reg_id = $registration_key;
+			try{
+				$error = $user->save();
+			}
+			catch(CDbException $ex){
+				$error = true;
+			}
+		} else {
+			if($user->reg_id != $registration_key){
+				$user->reg_id = $registration_key;
+				$error = $user->save();
+			}
+		}
+		echo json_encode(!$error);
 	}
 
 }
