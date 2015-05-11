@@ -7,6 +7,7 @@
  * @property integer $id
  * @property string $name
  * @property integer $group_id
+ * @property string $reg_id
  *
  * The followings are the available model relations:
  * @property Group $group
@@ -32,9 +33,10 @@ class User extends CActiveRecord
 			array('name, group_id', 'required'),
 			array('group_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
+			array('reg_id', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, group_id', 'safe', 'on'=>'search'),
+			array('id, name, group_id, reg_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,6 +61,7 @@ class User extends CActiveRecord
 			'id' => Yii::t('main', 'id'),
 			'name' => Yii::t('main', 'name'),
 			'group_id' => Yii::t('main', 'group'),
+			'reg_id' => Yii::t('main', 'Android Key'),
 		);
 	}
 
@@ -83,6 +86,7 @@ class User extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('group_id',$this->group_id);
+		$criteria->compare('reg_id',$this->reg_id,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -99,5 +103,4 @@ class User extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-
 }

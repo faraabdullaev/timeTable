@@ -27,5 +27,6 @@ $this->menu=array(
 			'label' => $model->getAttributeLabel('group_id'),
 			'value' => $model->group->name
 		),
+		'reg_id',
 	),
 )); ?>

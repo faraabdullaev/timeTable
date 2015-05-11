@@ -17,5 +17,8 @@
 	<?php echo CHtml::encode($data->group->name); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('reg_id')); ?>:</b>
+	<?php echo CHtml::encode($data->reg_id); ?>
+	<br />
 
 </div>

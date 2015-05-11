@@ -32,6 +32,7 @@ $this->menu=array(
 				array(''=>'') + Group::getGroupList()
 			)
 		),
+		'reg_id',
 		array(
 			'class'=>'CButtonColumn',
 		),

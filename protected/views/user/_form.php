@@ -35,6 +35,13 @@
 		<?php echo $form->error($model,'group_id'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'reg_id'); ?>
+		<?php echo $form->textField($model,'reg_id',
+			array('size'=>60,'maxlength'=>255, 'disabled'=>'disabled')); ?>
+		<?php echo $form->error($model,'reg_id'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('main', 'Create') : Yii::t('main', 'Save')); ?>
 	</div>

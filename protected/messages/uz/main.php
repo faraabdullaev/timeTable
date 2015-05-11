@@ -51,4 +51,6 @@ return array(
 
 	'Are you sure you want to delete this item?' => 'Ishonchingiz komilmi?',
 	'Operations' => 'Amallar',
+
+	'Android Key' => 'Android Key',
 );

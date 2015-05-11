@@ -52,9 +52,4 @@ class ApiController extends Controller{
 		echo $json;
 	}
 
-	public function actionSetCollumn(){
-		$db = Yii::app()->db->createCommand();
-		$db->addColumn('{{user}}', 'reg_id', 'TEXT NULL');
-	}
-
 }
