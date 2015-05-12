@@ -57,27 +57,34 @@ class ApiController extends Controller{
 		echo $json;
 	}
 
-	public function actionRegister($name, $group_id, $registration_key){
+	public function actionRegister(){
 		$error = false;
-		$user = User::model()->findByAttributes([
-			'name' => $name,
-			'group_id' => $group_id
-		]);
-		if(!$user){
-			$user = new User;
-			$user->name = $name;
-			$user->group_id = $group_id;
-			$user->reg_id = $registration_key;
-			try{
-				$error = $user->save();
-			}
-			catch(CDbException $ex){
-				$error = true;
-			}
-		} else {
-			if($user->reg_id != $registration_key){
+
+		if(Yii::app()->request->isPostRequest){
+			$name = Yii::app()->request->getPost('userName');
+			$group_id = Yii::app()->request->getPost('groupId');
+			$registration_key = Yii::app()->request->getPost('registrationId');
+
+			$user = User::model()->findByAttributes([
+				'name' => $name,
+				'group_id' => $group_id
+			]);
+			if(!$user){
+				$user = new User;
+				$user->name = $name;
+				$user->group_id = $group_id;
 				$user->reg_id = $registration_key;
-				$error = $user->save();
+				try{
+					$error = $user->save();
+				}
+				catch(CDbException $ex){
+					$error = true;
+				}
+			} else {
+				if($user->reg_id != $registration_key){
+					$user->reg_id = $registration_key;
+					$error = $user->save();
+				}
 			}
 		}
 		echo json_encode(!$error);
