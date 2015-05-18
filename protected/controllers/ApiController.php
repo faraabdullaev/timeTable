@@ -74,7 +74,7 @@ class ApiController extends Controller{
 //		];
 		$days = [];
 		foreach(Lesson::getDayList() as $day_key => $day_name){
-			$time = [];
+			$times = [];
 			foreach(Lesson::getTimeList() as $time_key => $time_name){
 				$lesson = Lesson::model()->findByAttributes([
 					'group_id' => $groupId,
