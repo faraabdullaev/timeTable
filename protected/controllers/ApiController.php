@@ -16,7 +16,9 @@ class ApiController extends Controller{
 
 		$url = 'https://android.googleapis.com/gcm/send';
 		$fields = array(
-			'registration_ids' => array(1),
+			'registration_ids' => array(
+				'APA91bF5SNqD85fWI0hBl9G9sIOWQDoPm53dWt-Cr2B1WdnQ-tdmwyrmAW2H9UtX6Zzcjzixmj0LRhtdt_buHEDlKuuoiz4qb6LBPZWlZFDq_Wjh9gjybQZ-zXKxNzsKkTEpIAltKkkiFaMw48GWPEwTVuKSCiaD2Q'
+			),
 			'data' => array('msg'=>'eshak')
 		);
 
@@ -90,4 +92,12 @@ class ApiController extends Controller{
 		echo json_encode(!$error);
 	}
 
+	public function actionAll($id){
+//		if(Yii::app()->request->isPostRequest){
+			$lessons = Lesson::model()->findAllByAttributes([
+				'id' => $id
+			]);
+
+//		}
+	}
 }

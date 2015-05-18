@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	Yii::t('main', 'Lessons')=>array('index'),
-	$model->name,
+	$model->id,
 );
 
 $this->menu=array(

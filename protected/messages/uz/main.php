@@ -53,4 +53,8 @@ return array(
 	'Operations' => 'Amallar',
 
 	'Android Key' => 'Android Key',
+
+	'this time not empty' => 'this time is not empty',
+	'this room not empty' => 'this room is not empty',
+	'this teacher not empty' => 'this teacher is not empty',
 );

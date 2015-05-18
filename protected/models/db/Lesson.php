@@ -150,4 +150,34 @@ class Lesson extends CActiveRecord
 			'5' => Yii::t('main', 'Fifth'),
 		);
 	}
+
+	public function beforeSave(){
+		return parent::beforeSave();
+	}
+
+	public function beforeValidate(){
+		$condition = $this->isNewRecord?'':'id != '.$this->id;
+		$model = self::model()->findByAttributes([
+			'teacher_id' => $this->teacher_id,
+			'time' => $this->time,
+			'day' => $this->day
+		], $condition);
+		if($model)
+			$this->addError('teacher_id', 'this teacher not empty');
+		$model = self::model()->findByAttributes([
+			'group_id' => $this->group_id,
+			'time' => $this->time,
+			'day' => $this->day
+		], $condition);
+		if($model)
+			$this->addError('time', 'this time not empty');
+		$model = self::model()->findByAttributes([
+			'room_id' => $this->room_id,
+			'time' => $this->time,
+			'day' => $this->day
+		], $condition);
+		if($model)
+			$this->addError('room_id', 'this room not empty');
+		return parent::beforeValidate();
+	}
 }
