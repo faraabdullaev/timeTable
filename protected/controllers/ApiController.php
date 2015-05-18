@@ -82,21 +82,21 @@ class ApiController extends Controller{
 					'day' => $day_key
 				]);
 				if($lesson)
-					$times[ $time_name ] = [
+					$times[] = [
 						'lesson' => $lesson->subject->name,
 						'teacherName' => $lesson->teacher->name,
 						'room' => $lesson->room->name,
 						'type' => Lesson::getTypeList()[$lesson->type],
 					];
 				else
-					$times[ $time_name ] = [
-						'lesson' => 'empty',
-						'teacherName' => 'empty',
-						'room' => 'empty',
-						'type' => 'empty',
+					$times[] = [
+						'lesson' 		=> 'empty',
+						'teacherName'	=> 'empty',
+						'room'			=> 'empty',
+						'type'			=> 'empty',
 					];
 			}
-			$days[ $day_name ] = $times;
+			$days[] = $times;
 		}
 		$result = json_encode($days);
 		echo $result;
