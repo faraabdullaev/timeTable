@@ -84,14 +84,14 @@ class ApiController extends Controller{
 				if($lesson)
 					$times[ $time_name ] = [
 						'lesson' => $lesson->subject->name,
-						'teacher_name' => $lesson->teacher->name,
+						'teacherName' => $lesson->teacher->name,
 						'room' => $lesson->room->name,
 						'type' => Lesson::getTypeList()[$lesson->type],
 					];
 				else
 					$times[ $time_name ] = [
 						'lesson' => 'empty',
-						'teacher_name' => 'empty',
+						'teacherName' => 'empty',
 						'room' => 'empty',
 						'type' => 'empty',
 					];
