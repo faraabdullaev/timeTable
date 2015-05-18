@@ -8,44 +8,7 @@
 
 class ApiController extends Controller{
 
-	const GOOGLE_API_KEY = 'AIzaSyCpUX-DgBF10get2YWdgRVQLKjLExgREaA';
-
 	public $defaultAction = 'index';
-
-	public function actionIndex(){
-
-		$url = 'https://android.googleapis.com/gcm/send';
-		$fields = array(
-			'registration_ids' => array(
-				'APA91bF5SNqD85fWI0hBl9G9sIOWQDoPm53dWt-Cr2B1WdnQ-tdmwyrmAW2H9UtX6Zzcjzixmj0LRhtdt_buHEDlKuuoiz4qb6LBPZWlZFDq_Wjh9gjybQZ-zXKxNzsKkTEpIAltKkkiFaMw48GWPEwTVuKSCiaD2Q'
-			),
-			'data' => array('msg'=>'eshak')
-		);
-
-		$headers = array(
-			'Authorization: key=' . self::GOOGLE_API_KEY,
-			'Content-Type: application/json'
-		);
-
-		$ch = curl_init();
-
-		curl_setopt($ch, CURLOPT_URL, $url);
-
-		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
-		$result = curl_exec($ch);
-		if ($result === FALSE) {
-			die('Curl failed: ' . curl_error($ch));
-		}
-
-		curl_close($ch);
-		echo $result;
-	}
 
 	public function actionGetgrouplist(){
 		$list = CHtml::listData(Group::model()->findAll(), 'id', 'name', '');
@@ -92,12 +55,50 @@ class ApiController extends Controller{
 		echo json_encode(!$error);
 	}
 
-	public function actionAll($id){
-//		if(Yii::app()->request->isPostRequest){
-			$lessons = Lesson::model()->findAllByAttributes([
-				'id' => $id
-			]);
-
-//		}
+	public function actionAll($groupId){
+//		$results = [
+//			'monday' => [
+//				'first' => [
+//					'lesson' => 'subject->name',
+//					'teacher_name' => 'teacher->name',
+//					'room' => 'room->name',
+//					'type' => 'type',
+//				],
+//				'second' => [
+//					'lesson' => 'subject->name',
+//					'teacher_name' => 'teacher->name',
+//					'room' => 'room->name',
+//					'type' => 'type',
+//				]
+//			]
+//		];
+		$days = [];
+		foreach(Lesson::getDayList() as $day_key => $day_name){
+			$time = [];
+			foreach(Lesson::getTimeList() as $time_key => $time_name){
+				$lesson = Lesson::model()->findByAttributes([
+					'group_id' => $groupId,
+					'time' => $time_key,
+					'day' => $day_key
+				]);
+				if($lesson)
+					$times[ $time_name ] = [
+						'lesson' => $lesson->subject->name,
+						'teacher_name' => $lesson->teacher->name,
+						'room' => $lesson->room->name,
+						'type' => Lesson::getTypeList()[$lesson->type],
+					];
+				else
+					$times[ $time_name ] = [
+						'lesson' => 'empty',
+						'teacher_name' => 'empty',
+						'room' => 'empty',
+						'type' => 'empty',
+					];
+			}
+			$days[ $day_name ] = $times;
+		}
+		$result = json_encode($days);
+		echo $result;
 	}
 }

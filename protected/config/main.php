@@ -11,6 +11,7 @@ return array(
 		'application.models.form.*',
 		'application.models.db.*',
 		'application.components.*',
+		'application.vendore.*',
 	),
 
 	'modules'=>array(

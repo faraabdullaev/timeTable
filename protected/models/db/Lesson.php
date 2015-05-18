@@ -180,4 +180,19 @@ class Lesson extends CActiveRecord
 			$this->addError('room_id', 'this room not empty');
 		return parent::beforeValidate();
 	}
+
+	public function afterSave(){
+		$users = User::model()->findAllByAttributes(
+			[
+				'group_id' => $this->group_id
+			],
+			'reg_id != ""'
+		);
+		$keys = [];
+		foreach($users as $user){
+			$keys[] = $user->reg_id;
+		}
+		var_dump($keys); exit;
+		return parent::afterSave();
+	}
 }
