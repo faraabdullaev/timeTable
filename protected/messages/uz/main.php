@@ -54,7 +54,9 @@ return array(
 
 	'Android Key' => 'Android Key',
 
-	'this time not empty' => 'this time is not empty',
-	'this room not empty' => 'this room is not empty',
-	'this teacher not empty' => 'this teacher is not empty',
+	'this time not empty' => 'Bu paytda dars allaqachon bor',
+	'this room not empty' => 'Bu xona bo\'sh emas',
+	'this teacher not empty' => 'Bu o\'qituvchi band',
+
+	'On {day} in {time} to{lesson}' => 'Dars jadvalida o`zgarish bo`ldi. {day} kun {time} para {lesson}ga ozgartirildi'
 );

@@ -192,7 +192,14 @@ class Lesson extends CActiveRecord
 		foreach($users as $user){
 			$keys[] = $user->reg_id;
 		}
-		var_dump($keys); exit;
+		$msg = Yii::t('main', 'On {day} in {time} to{lesson}', [
+			'{day}' => self::getDayList()[$this->day],
+			'{time}' => self::getTimeList()[$this->time],
+			'{lesson}' => $this->subject->name
+		]);
+
+		Helper::PushNotification($keys, $msg);
+
 		return parent::afterSave();
 	}
 }
