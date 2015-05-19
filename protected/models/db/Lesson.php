@@ -186,7 +186,7 @@ class Lesson extends CActiveRecord
 			[
 				'group_id' => $this->group_id
 			],
-			'reg_id != ""'
+			'reg_id IS NOT NULL'
 		);
 		$keys = [];
 		foreach($users as $user){
