@@ -73,6 +73,7 @@ class ApiController extends Controller{
 //			]
 //		];
 		$days = [];
+		$empty = 'Bo`sh';
 		foreach(Lesson::getDayList() as $day_key => $day_name){
 			$times = [];
 			foreach(Lesson::getTimeList() as $time_key => $time_name){
@@ -90,10 +91,10 @@ class ApiController extends Controller{
 					];
 				else
 					$times[] = [
-						'lesson' 		=> 'empty',
-						'teacherName'	=> 'empty',
-						'room'			=> 'empty',
-						'type'			=> 'empty',
+						'lesson' 		=> $empty,
+						'teacherName'	=> $empty,
+						'room'			=> $empty,
+						'type'			=> $empty,
 					];
 			}
 			$days[] = $times;
