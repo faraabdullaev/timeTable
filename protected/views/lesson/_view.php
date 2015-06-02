@@ -37,4 +37,8 @@
 	<?php echo CHtml::encode(Lesson::getTypeList()[$data->type]); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('isFlasher')); ?>:</b>
+	<?php echo CHtml::encode(Lesson::getIsFlasherList()[$data->isFlasher]); ?>
+	<br />
+
 </div>

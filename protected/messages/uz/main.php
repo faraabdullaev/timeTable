@@ -58,5 +58,7 @@ return array(
 	'this room not empty' => 'Bu xona bo\'sh emas',
 	'this teacher not empty' => 'Bu o\'qituvchi band',
 
-	'On {day} in {time} to{lesson}' => 'Dars jadvalida o`zgarish bo`ldi. {day} kun {time} para {lesson}ga ozgartirildi'
+	'On {day} in {time} to{lesson}' => 'Dars jadvalida o`zgarish bo`ldi. {day} kun {time} para {lesson}ga ozgartirildi',
+
+	'isFlasher' => 'Tok xafta',
 );

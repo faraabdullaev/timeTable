@@ -72,6 +72,7 @@ class ApiController extends Controller{
 						'teacherName' => $lesson->teacher->name,
 						'room' => $lesson->room->name,
 						'type' => Lesson::getTypeList()[$lesson->type],
+						'isFlasher' => Lesson::getIsFlasherList()[$lesson->isFlasher],
 					];
 				else
 					$times[] = [
@@ -79,6 +80,7 @@ class ApiController extends Controller{
 						'teacherName'	=> $empty,
 						'room'			=> $empty,
 						'type'			=> $empty,
+						'isFlasher'		=> $empty,
 					];
 			}
 			$days[] = $times;

@@ -9,6 +9,7 @@
  * @property integer $group_id
  * @property integer $room_id
  * @property integer $teacher_id
+ * @property integer $isFlasher
  * @property string $time
  * @property string $day
  * @property string $type
@@ -38,7 +39,7 @@ class Lesson extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('subject_id, group_id, room_id, teacher_id, time, day, type', 'required'),
-			array('subject_id, group_id, room_id, teacher_id', 'numerical', 'integerOnly'=>true),
+			array('subject_id, group_id, room_id, teacher_id, isFlasher', 'numerical', 'integerOnly'=>true),
 			array('time, day, type', 'length', 'max'=>1),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -75,6 +76,7 @@ class Lesson extends CActiveRecord
 			'time' => Yii::t('main', 'time'),
 			'day' => Yii::t('main', 'day'),
 			'type' => Yii::t('main', 'type'),
+			'isFlasher' => Yii::t('main', 'isFlasher'),
 		);
 	}
 
@@ -104,6 +106,7 @@ class Lesson extends CActiveRecord
 		$criteria->compare('time',$this->time);
 		$criteria->compare('day',$this->day);
 		$criteria->compare('type',$this->type);
+		$criteria->compare('isFlasher',$this->isFlasher);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -148,6 +151,13 @@ class Lesson extends CActiveRecord
 			'3' => Yii::t('main', 'Third'),
 			'4' => Yii::t('main', 'Fourth'),
 			'5' => Yii::t('main', 'Fifth'),
+		);
+	}
+
+	public static function getIsFlasherList(){
+		return array(
+			'0' => 'Doimiy',
+			'1' => 'Migalka'
 		);
 	}
 

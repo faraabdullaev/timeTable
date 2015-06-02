@@ -50,5 +50,9 @@ $this->menu=array(
 			'label' => $model->getAttributeLabel('type'),
 			'value' => Lesson::getTypeList()[$model->type]
 		),
+		'isFlasher'=>array(
+			'label' => $model->getAttributeLabel('isFlasher'),
+			'value' => Lesson::getIsFlasherList()[$model->isFlasher]
+		),
 	),
 )); ?>

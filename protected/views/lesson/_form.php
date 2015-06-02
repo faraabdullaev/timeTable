@@ -93,6 +93,16 @@
 		<?php echo $form->error($model,'type'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'isFlasher'); ?>
+		<?php echo $form->dropDownList(
+			$model,
+			'isFlasher',
+			Lesson::getIsFlasherList()
+		); ?>
+		<?php echo $form->error($model,'isFlasher'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('main', 'Create') : Yii::t('main', 'Save')); ?>
 	</div>

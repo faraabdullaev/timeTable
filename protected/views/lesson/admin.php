@@ -64,6 +64,15 @@ $this->menu=array(
 				array(''=>'') + Lesson::getTypeList()
 			)
 		),
+		'isFlasher'=>array(
+			'name' => 'isFlasher',
+			'value' => 'Lesson::getIsFlasherList()[$data->isFlasher]',
+			'filter' => CHtml::dropDownList(
+				'Lesson[isFlasher]',
+				$model->search()->model->attributes['isFlasher'],
+				array(''=>'') + Lesson::getIsFlasherList()
+			)
+		),
 		array(
 			'class'=>'CButtonColumn',
 		),
