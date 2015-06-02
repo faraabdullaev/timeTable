@@ -161,7 +161,7 @@ class Lesson extends CActiveRecord
 			'teacher_id' => $this->teacher_id,
 			'time' => $this->time,
 			'day' => $this->day
-		], $condition);
+		], $condition . ' AND type != 1');
 		if($model)
 			$this->addError('teacher_id', 'this teacher not empty');
 		$model = self::model()->findByAttributes([

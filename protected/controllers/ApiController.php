@@ -56,22 +56,6 @@ class ApiController extends Controller{
 	}
 
 	public function actionAll($groupId){
-//		$results = [
-//			'monday' => [
-//				'first' => [
-//					'lesson' => 'subject->name',
-//					'teacher_name' => 'teacher->name',
-//					'room' => 'room->name',
-//					'type' => 'type',
-//				],
-//				'second' => [
-//					'lesson' => 'subject->name',
-//					'teacher_name' => 'teacher->name',
-//					'room' => 'room->name',
-//					'type' => 'type',
-//				]
-//			]
-//		];
 		$days = [];
 		$empty = 'Bo`sh';
 		foreach(Lesson::getDayList() as $day_key => $day_name){
