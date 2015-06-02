@@ -157,11 +157,12 @@ class Lesson extends CActiveRecord
 
 	public function beforeValidate(){
 		$condition = $this->isNewRecord?'':'id != '.$this->id;
+		$condition2 = $this->isNewRecord?'t.type != 1':' AND t.type != 1';
 		$model = self::model()->findByAttributes([
 			'teacher_id' => $this->teacher_id,
 			'time' => $this->time,
 			'day' => $this->day
-		], $condition . ' AND type != 1');
+		], $condition . $condition2);
 		if($model)
 			$this->addError('teacher_id', 'this teacher not empty');
 		$model = self::model()->findByAttributes([
@@ -175,7 +176,7 @@ class Lesson extends CActiveRecord
 			'room_id' => $this->room_id,
 			'time' => $this->time,
 			'day' => $this->day
-		], $condition);
+		], $condition . $condition2);
 		if($model)
 			$this->addError('room_id', 'this room not empty');
 		return parent::beforeValidate();
