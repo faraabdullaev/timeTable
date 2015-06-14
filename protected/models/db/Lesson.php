@@ -22,6 +22,9 @@
  */
 class Lesson extends CActiveRecord
 {
+	const WEEK_FULL = 0;
+	const WEEK_TOP = 1;
+	const WEEK_BOTTOM = 2;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -156,9 +159,9 @@ class Lesson extends CActiveRecord
 
 	public static function getIsFlasherList(){
 		return array(
-			'0' => 'Doimiy',
-			'1' => 'Tok',
-			'2' => 'Juft'
+			self::WEEK_FULL => Yii::t('main', 'week full'),
+			self::WEEK_TOP => Yii::t('main', 'week top'),
+			self::WEEK_BOTTOM => Yii::t('main', 'week bottom')
 		);
 	}
 
@@ -204,7 +207,7 @@ class Lesson extends CActiveRecord
 		$condition2 = $this->isNewRecord?'':' AND ';
 		$condition2 .= ' t.type != 1 ';
 
-		if($this->isFlasher != 0)
+		if($this->isFlasher != self::WEEK_FULL)
 			$conditionByAttributes += [
 				'isFlasher' => $this->isFlasher
 			];

@@ -61,4 +61,10 @@ return array(
 	'On {day} in {time} to{lesson}' => 'Dars jadvalida o`zgarish bo`ldi. {day} kun {time} para {lesson}ga ozgartirildi',
 
 	'isFlasher' => 'Tok xafta',
+
+	'week full' => 'Doimiy',
+	'week top' => 'Tok',
+	'week bottom' => 'Juft',
+
+	'This teacher not have lessons' => 'This teacher not have lessons',
 );

@@ -2,11 +2,32 @@
 
 class SiteController extends Controller
 {
-	public $defaultAction = 'login';
+	public $defaultAction = 'index';
 
-	public function actionIndex()
-	{
-		$this->render('index');
+	public function actionIndex(){
+		if(Yii::app()->request->isAjaxRequest){
+			$id = Yii::app()->request->getPost('teacher_id');
+			$teacherLessons = Lesson::model()->findAllByAttributes(
+				[
+					'teacher_id' => $id
+				],
+				[
+					'order' => 'time'
+				]
+			);
+			if(count($teacherLessons)==0){
+				$this->renderPartial('_emptyResult');
+				Yii::app()->end();
+			}
+			$lessons = [];
+			foreach($teacherLessons as $lesson){
+				$lessons[$lesson->day][] = $lesson;
+			}
+			$this->renderPartial('_planTable', [
+				'lessons' => $lessons
+			]);
+		} else
+			$this->render('index');
 	}
 
 	public function actionError()
