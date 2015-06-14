@@ -157,7 +157,8 @@ class Lesson extends CActiveRecord
 	public static function getIsFlasherList(){
 		return array(
 			'0' => 'Doimiy',
-			'1' => 'Migalka'
+			'1' => 'Tok',
+			'2' => 'Juft'
 		);
 	}
 
