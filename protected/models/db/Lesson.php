@@ -166,30 +166,54 @@ class Lesson extends CActiveRecord
 		return parent::beforeSave();
 	}
 
-	public function beforeValidate(){
-		$condition = $this->isNewRecord?'':'id != '.$this->id;
-		$condition2 = $this->isNewRecord?'t.type != 1':' AND t.type != 1';
-		$model = self::model()->findByAttributes([
-			'teacher_id' => $this->teacher_id,
-			'time' => $this->time,
-			'day' => $this->day
-		], $condition . $condition2);
+	protected function validateByTeacher($condition, $conditionByAttributes){
+		$model = self::model()->findByAttributes(
+			[ 'teacher_id' => $this->teacher_id ] + $conditionByAttributes,
+			$condition
+		);
 		if($model)
 			$this->addError('teacher_id', 'this teacher not empty');
-		$model = self::model()->findByAttributes([
-			'group_id' => $this->group_id,
-			'time' => $this->time,
-			'day' => $this->day
-		], $condition);
+	}
+
+	protected function validateByGroup($condition, $conditionByAttributes){
+		// time condition not setter
+		$model = self::model()->findByAttributes(
+			[ 'group_id' => $this->group_id ] + $conditionByAttributes,
+			$condition
+		);
 		if($model)
 			$this->addError('time', 'this time not empty');
-		$model = self::model()->findByAttributes([
-			'room_id' => $this->room_id,
-			'time' => $this->time,
-			'day' => $this->day
-		], $condition . $condition2);
+	}
+
+	protected function validateByRoom($condition, $conditionByAttributes){
+		$model = self::model()->findByAttributes(
+			[ 'room_id' => $this->room_id ] + $conditionByAttributes,
+			$condition
+		);
 		if($model)
 			$this->addError('room_id', 'this room not empty');
+	}
+
+	public function beforeValidate(){
+		$conditionByAttributes = [
+			'time' => $this->time,
+			'day' => $this->day
+		];
+
+		$condition1 = $this->isNewRecord?'':'t.id != '.$this->id;
+		$condition2 = $this->isNewRecord?'':' AND ';
+		$condition2 .= ' t.type != 1 ';
+
+		if($this->isFlasher != 0)
+			$conditionByAttributes += [
+				'isFlasher' => $this->isFlasher
+			];
+
+		$this->validateByTeacher($condition1.$condition2, $conditionByAttributes);
+		$this->validateByGroup($condition1, $conditionByAttributes);
+		$this->validateByRoom($condition1.$condition2, $conditionByAttributes);
+
+
 		return parent::beforeValidate();
 	}
 
