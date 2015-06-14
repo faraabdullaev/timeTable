@@ -2,3 +2,4 @@
 .idea/*
 
 protected/config/db_config.php
+index.php
